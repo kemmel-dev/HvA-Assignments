@@ -28,7 +28,7 @@ final int frameLimit = 30;
 int resetColorFrame = 0;
 int resetGoldencookieFrame = 0;
 
-final float SIZE_X = 1920, SIZE_Y = 1080;
+final float SIZE_X = 1280, SIZE_Y = 720;
 int incrementOpacity = 255;
 
 long increaseAmount = 0L;
@@ -52,13 +52,28 @@ public void setup()
 
 public void DetermineFontSizes()
 {
-  bakeryButton.style.SetFontSize(50);
-  goldenCookie.style.SetFontSize(50);
-  grandmaButton.style.SetFontSize(50);
-  cookieButton.style.SetFontSize(50);
-  factoryButton.style.SetFontSize(50);
-  cookies.increaseTextStyle.SetFontSize(30);
-  score.scoreStyle.SetFontSize(80);
+  float fontSizeL = 80;
+  float fontSizeM = 50;
+  float fontSizeS = 30;
+  if (SIZE_X > 3000)
+  {
+    fontSizeL *= 1.5f;
+    fontSizeM *= 1.5f;
+    fontSizeS *= 1.5f;
+  }
+  else if (SIZE_X < 1900)
+  {
+    fontSizeL *= .75f;
+    fontSizeM *= .75f;
+    fontSizeS *= .75f;
+  }
+  bakeryButton.style.SetFontSize(fontSizeM);
+  goldenCookie.style.SetFontSize(fontSizeM);
+  grandmaButton.style.SetFontSize(fontSizeM);
+  cookieButton.style.SetFontSize(fontSizeM);
+  factoryButton.style.SetFontSize(fontSizeM);
+  cookies.increaseTextStyle.SetFontSize(fontSizeS);
+  score.scoreStyle.SetFontSize(fontSizeL);
 }
 
 public void draw()
@@ -570,9 +585,10 @@ class Styles
     {
         int fontSize = 1;
 
-        public int SetFontSize(int _fontSize)
+        // Gets a value from CookieClicker.pde's DetermineFontSizes() method
+        public int SetFontSize(float _fontSize)
         {
-            return fontSize = _fontSize;
+            return fontSize = PApplet.parseInt(_fontSize);
         }
 
         public void SetStyle(Boolean on)
@@ -593,10 +609,9 @@ class Styles
         int incrementStep  = 0;
 
         // Gets a value from CookieClicker.pde's DetermineFontSizes() method
-        public void SetFontSize(int _fontSize)
+        public int SetFontSize(float _fontSize)
         {
-            fontSize = _fontSize;
-            return;
+            return fontSize = PApplet.parseInt(_fontSize);
         }
 
         public void SetStyle(Boolean on)
@@ -627,9 +642,10 @@ class Styles
         int chocolateChipColorClicked = color(180, 75, 0);
         int currentChipColor = chocolateChipColor;
 
-        public int SetFontSize(int _fontSize)
+        // Gets a value from CookieClicker.pde's DetermineFontSizes() method
+        public int SetFontSize(float _fontSize)
         {
-            return fontSize = _fontSize;
+            return fontSize = PApplet.parseInt(_fontSize);
         }
 
         public void SetStyle(Boolean on)
@@ -659,9 +675,9 @@ class Styles
         int currentColor = originalColor;
         int clickedColor = color(r-30, g-30, b-30); 
 
-        public void SetFontSize(int _fontSize)
+        public void SetFontSize(float _fontSize)
         {
-            fontSize = _fontSize;
+            fontSize = PApplet.parseInt(_fontSize);
             fontSizeSmall = PApplet.parseInt(fontSize / 2);
             return;
         }
@@ -694,9 +710,9 @@ class Styles
         int currentColor = originalColor;
         int clickedColor = color(r-30, g-30, b-30); 
 
-        public void SetFontSize(int _fontSize)
+        public void SetFontSize(float _fontSize)
         {
-            fontSize = _fontSize;
+            fontSize = PApplet.parseInt(_fontSize);
             fontSizeSmall = PApplet.parseInt(fontSize / 2);
             return;
         }
@@ -729,9 +745,9 @@ class Styles
         int currentColor = originalColor;
         int clickedColor = color(r-30, g-30, b-30); 
 
-        public void SetFontSize(int _fontSize)
+        public void SetFontSize(float _fontSize)
         {
-            fontSize = _fontSize;
+            fontSize = PApplet.parseInt(_fontSize);
             fontSizeSmall = PApplet.parseInt(fontSize / 2);
             return;
         }
@@ -766,9 +782,9 @@ class Styles
 
         int chocolateChipColor = color(128,0,0);
 
-        public int SetFontSize(int _fontSize)
+        public int SetFontSize(float _fontSize)
         {
-            return fontSize = _fontSize;
+            return fontSize = PApplet.parseInt(_fontSize);
         }
 
         public void SetStyle(Boolean on)
@@ -786,7 +802,7 @@ class Styles
         }
     }
 }
-  public void settings() {  size(1920, 1080); }
+  public void settings() {  size(1280, 720); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "CookieClicker" };
     if (passedArgs != null) {

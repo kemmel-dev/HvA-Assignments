@@ -12,7 +12,7 @@ final int frameLimit = 30;
 int resetColorFrame = 0;
 int resetGoldencookieFrame = 0;
 
-final float SIZE_X = 1920, SIZE_Y = 1080;
+final float SIZE_X = 1280, SIZE_Y = 720;
 int incrementOpacity = 255;
 
 long increaseAmount = 0L;
@@ -21,7 +21,7 @@ Boolean countingFrames = false;
 
 void setup()
 {
-   size(1920, 1080);
+   size(1280, 720);
    
    noStroke();
    ellipseMode(CENTER);
@@ -36,13 +36,28 @@ void setup()
 
 void DetermineFontSizes()
 {
-  bakeryButton.style.SetFontSize(50);
-  goldenCookie.style.SetFontSize(50);
-  grandmaButton.style.SetFontSize(50);
-  cookieButton.style.SetFontSize(50);
-  factoryButton.style.SetFontSize(50);
-  cookies.increaseTextStyle.SetFontSize(30);
-  score.scoreStyle.SetFontSize(80);
+  float fontSizeL = 80;
+  float fontSizeM = 50;
+  float fontSizeS = 30;
+  if (SIZE_X > 3000)
+  {
+    fontSizeL *= 1.5;
+    fontSizeM *= 1.5;
+    fontSizeS *= 1.5;
+  }
+  else if (SIZE_X < 1900)
+  {
+    fontSizeL *= .75;
+    fontSizeM *= .75;
+    fontSizeS *= .75;
+  }
+  bakeryButton.style.SetFontSize(fontSizeM);
+  goldenCookie.style.SetFontSize(fontSizeM);
+  grandmaButton.style.SetFontSize(fontSizeM);
+  cookieButton.style.SetFontSize(fontSizeM);
+  factoryButton.style.SetFontSize(fontSizeM);
+  cookies.increaseTextStyle.SetFontSize(fontSizeS);
+  score.scoreStyle.SetFontSize(fontSizeL);
 }
 
 void draw()

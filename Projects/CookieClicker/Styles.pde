@@ -4,9 +4,10 @@ class Styles
     {
         int fontSize = 1;
 
-        int SetFontSize(int _fontSize)
+        // Gets a value from CookieClicker.pde's DetermineFontSizes() method
+        int SetFontSize(float _fontSize)
         {
-            return fontSize = _fontSize;
+            return fontSize = int(_fontSize);
         }
 
         void SetStyle(Boolean on)
@@ -27,10 +28,9 @@ class Styles
         int incrementStep  = 0;
 
         // Gets a value from CookieClicker.pde's DetermineFontSizes() method
-        void SetFontSize(int _fontSize)
+        int SetFontSize(float _fontSize)
         {
-            fontSize = _fontSize;
-            return;
+            return fontSize = int(_fontSize);
         }
 
         void SetStyle(Boolean on)
@@ -61,9 +61,10 @@ class Styles
         color chocolateChipColorClicked = color(180, 75, 0);
         color currentChipColor = chocolateChipColor;
 
-        int SetFontSize(int _fontSize)
+        // Gets a value from CookieClicker.pde's DetermineFontSizes() method
+        int SetFontSize(float _fontSize)
         {
-            return fontSize = _fontSize;
+            return fontSize = int(_fontSize);
         }
 
         void SetStyle(Boolean on)
@@ -93,9 +94,9 @@ class Styles
         color currentColor = originalColor;
         color clickedColor = color(r-30, g-30, b-30); 
 
-        void SetFontSize(int _fontSize)
+        void SetFontSize(float _fontSize)
         {
-            fontSize = _fontSize;
+            fontSize = int(_fontSize);
             fontSizeSmall = int(fontSize / 2);
             return;
         }
@@ -128,9 +129,9 @@ class Styles
         color currentColor = originalColor;
         color clickedColor = color(r-30, g-30, b-30); 
 
-        void SetFontSize(int _fontSize)
+        void SetFontSize(float _fontSize)
         {
-            fontSize = _fontSize;
+            fontSize = int(_fontSize);
             fontSizeSmall = int(fontSize / 2);
             return;
         }
@@ -163,9 +164,9 @@ class Styles
         color currentColor = originalColor;
         color clickedColor = color(r-30, g-30, b-30); 
 
-        void SetFontSize(int _fontSize)
+        void SetFontSize(float _fontSize)
         {
-            fontSize = _fontSize;
+            fontSize = int(_fontSize);
             fontSizeSmall = int(fontSize / 2);
             return;
         }
@@ -200,9 +201,9 @@ class Styles
 
         color chocolateChipColor = color(128,0,0);
 
-        int SetFontSize(int _fontSize)
+        int SetFontSize(float _fontSize)
         {
-            return fontSize = _fontSize;
+            return fontSize = int(_fontSize);
         }
 
         void SetStyle(Boolean on)

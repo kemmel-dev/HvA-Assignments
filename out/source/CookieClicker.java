@@ -15,6 +15,7 @@ import java.io.IOException;
 public class CookieClicker extends PApplet {
 
 Cookies cookies = new Cookies();
+GoldenCookie goldenCookie = new GoldenCookie();
 CookieButton cookieButton = new CookieButton();
 GrandmaButton grandmaButton = new GrandmaButton();
 BakeryButton bakeryButton = new BakeryButton();
@@ -25,18 +26,21 @@ Score score = new Score();
 // one second has passed.
 final int frameLimit = 30;
 int resetColorFrame = 0;
+int resetGoldencookieFrame = 0;
 
 final float SIZE_X = 1920, SIZE_Y = 1080;
 int incrementOpacity = 255;
 
 long increaseAmount = 0L;
 
+Boolean countingFrames = false;
 
 public void setup()
 {
    
    
    noStroke();
+   ellipseMode(CENTER);
    rectMode(CENTER);
    textSize(50);
    
@@ -49,6 +53,7 @@ public void setup()
 public void DetermineFontSizes()
 {
   bakeryButton.style.SetFontSize(50);
+  goldenCookie.style.SetFontSize(50);
   grandmaButton.style.SetFontSize(50);
   cookieButton.style.SetFontSize(50);
   factoryButton.style.SetFontSize(50);
@@ -59,17 +64,37 @@ public void DetermineFontSizes()
 public void draw()
 {
   background(0);
+  goldenCookie.Display();
   bakeryButton.Display();
   cookieButton.Display();
   grandmaButton.Display();
   factoryButton.Display();
-  if (frameCount > resetColorFrame)
+  if (countingFrames)
   {
-    ResetClickedColors();
-    resetColorFrame = 0;
+    if (frameCount > resetColorFrame)
+    {
+      ResetClickedColors();
+      resetColorFrame = 0;
+      if (goldenCookie.hidden)
+      {
+        countingFrames = false;
+      }
+    }
   }
+
   if (frameCount % frameLimit == 0)
   {
+    if (goldenCookie.hidden)
+    {
+      PlaceGoldenCookie();
+    }
+    else
+    {
+      if (frameCount > resetGoldencookieFrame)
+      {
+        goldenCookie.hidden = true;
+      }
+    }
     cookies.Increase(increaseAmount);
     cookies.increaseTextStyle.incrementOpacity = 255;
   }
@@ -77,11 +102,33 @@ public void draw()
   score.Display(cookies.count);
 }
 
+// If no golden cookie is shown, takes a chance to place a golden cookie randomly.
+public void PlaceGoldenCookie()
+{
+  if (goldenCookie.hidden)
+  {
+    // Get a random number up to pMax as p
+    float pMax = 100;
+    float p = random(0, pMax);
+
+    // percentageCorrect defines the probability at which we place a cookie.
+    float percentageCorrect = 5;
+    if (p <= percentageCorrect)
+    {
+      goldenCookie.hidden = false;
+      goldenCookie.SetRandomPos();
+      countingFrames = true;
+      resetGoldencookieFrame = frameCount + 60;
+    }
+  }
+}
+
 public void mouseClicked()
 {
   if (cookieButton.CheckClick(mouseX, mouseY))
   {
     cookieButton.style.currentColor = cookieButton.style.clickedColor;
+    cookieButton.style.currentChipColor = cookieButton.style.chocolateChipColorClicked;
     CountFrames();
     return;
   }
@@ -98,19 +145,25 @@ public void mouseClicked()
     return;
   }
   if (factoryButton.CheckClick(mouseX, mouseY))
+  {
     factoryButton.style.currentColor = factoryButton.style.clickedColor;
     CountFrames();
+    return;
+  }
+  if (goldenCookie.CheckClick(mouseX, mouseY))
     return;
 }
 
 public void CountFrames()
 {
   resetColorFrame = frameCount + PApplet.parseInt(frameLimit / 2);
+  countingFrames = true;
 }
 
 public void ResetClickedColors()
 {
   cookieButton.style.currentColor = cookieButton.style.originalColor;
+  cookieButton.style.currentChipColor = cookieButton.style.chocolateChipColor;
   grandmaButton.style.currentColor = grandmaButton.style.originalColor;
   bakeryButton.style.currentColor = bakeryButton.style.originalColor;
   factoryButton.style.currentColor = factoryButton.style.originalColor;
@@ -191,38 +244,44 @@ class CookieButton extends Styles
 {
     CookieButtonStyle style = new Styles.CookieButtonStyle();
 
-    float x, y, w, w_half, h, h_half;
+    float x, y, r, d, smallR;
 
     CookieButton()
     {
         x = SIZE_X / 2;
         y = SIZE_Y - SIZE_Y / 4;
-        w = SIZE_X / 8;
-        w_half = w / 2;
-        h = SIZE_Y / 6;
-        h_half = h / 2;
+        d = SIZE_X / 8;
+        r = d / 2;
+        smallR = r / 4;
     }
 
     public void Display()
     {
         style.SetStyle(true);
-        x = SIZE_X / 2;
-        y = SIZE_Y - SIZE_Y / 4;
-        w = SIZE_X / 8;
-        w_half = w / 2;
-        h = SIZE_Y / 6;
-        rect(x, y, w, h);
-        fill(0);
-        text("Koenk\npls!", x, y - h / 8);
+        ellipse(x, y, d, d);
+        fill(style.currentChipColor);
+        ellipse(x - smallR, y, smallR, smallR);
+        ellipse(x + smallR + smallR / 2, y - smallR * 2, smallR, smallR);
+        ellipse(x + smallR + smallR / 2, y + smallR * 2, smallR, smallR);
+        ellipse(x - smallR * 3, y + smallR, smallR, smallR);
+        ellipse(x + smallR * 3, y - smallR, smallR, smallR);
+        ellipse(x - smallR, y - smallR * 3, smallR, smallR);
+        ellipse(x - smallR, y + smallR * 3, smallR, smallR);
+        fill(style.textColor);
+        text("Koenk\npls!", x, y - r / 8);
         style.SetStyle(false);
     }
 
+    // Checks whether a circular button has been clicked
     public Boolean CheckClick(float mouseX, float mouseY)
     {
+        // Get horizontal and vertical distance from center of button to mouse
         float distX = abs(mouseX - x);
         float distY = abs(mouseY - y);
-
-        if (distX <= w_half && distY <= h_half)
+        // Get diagonal distance from center to mouse through Pythagoras
+        float dist = sqrt(distX * distX + distY * distY);
+        // if that distance is smaller than the radius of the button, click
+        if (dist <= r)
         {
             OnClick();
             return true;
@@ -334,6 +393,77 @@ class FactoryButton extends Styles
             cookies.count -= cost;
             increaseAmount += increment;
         }
+    }
+}
+class GoldenCookie extends Styles
+{
+    GoldenCookieStyle style = new Styles.GoldenCookieStyle();
+
+    Boolean hidden = true;
+
+    float x, y, r, d, smallR;
+
+    GoldenCookie()
+    {
+        d = SIZE_X / 8;
+        r = d / 2;
+        smallR = r / 4;
+        SetRandomPos();
+    }
+
+    public void SetRandomPos()
+    {
+        x = random(r, SIZE_X - r);
+        y = random(r, SIZE_Y - r);
+    }
+
+    public void Display()
+    {
+        if (hidden)
+        {
+            return;
+        }
+        style.SetStyle(true);
+        ellipse(x, y, d, d);
+        fill(style.chocolateChipColor);
+        ellipse(x - smallR, y, smallR, smallR);
+        ellipse(x + smallR + smallR / 2, y - smallR * 2, smallR, smallR);
+        ellipse(x + smallR + smallR / 2, y + smallR * 2, smallR, smallR);
+        ellipse(x - smallR * 3, y + smallR, smallR, smallR);
+        ellipse(x + smallR * 3, y - smallR, smallR, smallR);
+        ellipse(x - smallR, y - smallR * 3, smallR, smallR);
+        ellipse(x - smallR, y + smallR * 3, smallR, smallR);
+        fill(style.textColor);
+        text("MEGA\nKOENK!", x, y - r / 8);
+        style.SetStyle(false);
+    }
+
+    // Checks whether a circular button has been clicked
+    public Boolean CheckClick(float mouseX, float mouseY)
+    {
+        if (hidden)
+        {
+            return false;
+        }
+        // Get horizontal and vertical distance from center of button to mouse
+        float distX = abs(mouseX - x);
+        float distY = abs(mouseY - y);
+        // Get diagonal distance from center to mouse through Pythagoras
+        float dist = sqrt(distX * distX + distY * distY);
+        // if that distance is smaller than the radius of the button, click
+        if (dist <= r)
+        {
+            OnClick();
+            return true;
+        }
+        return false;
+    }
+
+    public void OnClick()
+    {
+        cookies.Increase(500);
+        cookies.ShowIncrease();
+        hidden = true;
     }
 }
 // This class is a non-used template class for button types.
@@ -491,6 +621,11 @@ class Styles
         int originalColor = color(r,g,b);
         int currentColor = originalColor;
         int clickedColor = color(r-30, g-30, b-30); 
+        int textColor = 0;
+
+        int chocolateChipColor = color(210,105,30);
+        int chocolateChipColorClicked = color(180, 75, 0);
+        int currentChipColor = chocolateChipColor;
 
         public int SetFontSize(int _fontSize)
         {
@@ -503,10 +638,8 @@ class Styles
             {
                 fill(currentColor);
                 textSize(fontSize);
-                stroke(255);
-                strokeWeight(5);
                 textAlign(CENTER);
-                // Later also fill (0) for text in CookieButton.Display()
+                // More styling in CookieButton.Display()
                 return;
             }
             textAlign(LEFT);
@@ -612,6 +745,40 @@ class Styles
                 strokeWeight(5);
                 textAlign(CENTER);
                 // More text styling is done in FactoryButton.Display()
+                return;
+            }
+            textAlign(LEFT);
+            noStroke();
+        }
+    }
+
+    class GoldenCookieStyle 
+    {
+        int fontSize = 1;
+
+        int r = 218;
+        int g = 165;
+        int b = 32;
+        int originalColor = color(r,g,b);
+        int currentColor = originalColor;
+        int clickedColor = color(r-30, g-30, b-30); 
+        int textColor = 0;
+
+        int chocolateChipColor = color(128,0,0);
+
+        public int SetFontSize(int _fontSize)
+        {
+            return fontSize = _fontSize;
+        }
+
+        public void SetStyle(Boolean on)
+        {
+            if (on)
+            {
+                fill(currentColor);
+                textSize(fontSize);
+                textAlign(CENTER);
+                // Later also fill (0) for text in CookieButton.Display()
                 return;
             }
             textAlign(LEFT);

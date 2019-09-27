@@ -1,23 +1,34 @@
-class CookieButton extends Styles
+class GoldenCookie extends Styles
 {
-    CookieButtonStyle style = new Styles.CookieButtonStyle();
+    GoldenCookieStyle style = new Styles.GoldenCookieStyle();
+
+    Boolean hidden = true;
 
     float x, y, r, d, smallR;
 
-    CookieButton()
+    GoldenCookie()
     {
-        x = SIZE_X / 2;
-        y = SIZE_Y - SIZE_Y / 4;
         d = SIZE_X / 8;
         r = d / 2;
         smallR = r / 4;
+        SetRandomPos();
+    }
+
+    void SetRandomPos()
+    {
+        x = random(r, SIZE_X - r);
+        y = random(r, SIZE_Y - r);
     }
 
     void Display()
     {
+        if (hidden)
+        {
+            return;
+        }
         style.SetStyle(true);
         ellipse(x, y, d, d);
-        fill(style.currentChipColor);
+        fill(style.chocolateChipColor);
         ellipse(x - smallR, y, smallR, smallR);
         ellipse(x + smallR + smallR / 2, y - smallR * 2, smallR, smallR);
         ellipse(x + smallR + smallR / 2, y + smallR * 2, smallR, smallR);
@@ -26,13 +37,17 @@ class CookieButton extends Styles
         ellipse(x - smallR, y - smallR * 3, smallR, smallR);
         ellipse(x - smallR, y + smallR * 3, smallR, smallR);
         fill(style.textColor);
-        text("Koenk\npls!", x, y - r / 8);
+        text("MEGA\nKOENK!", x, y - r / 8);
         style.SetStyle(false);
     }
 
     // Checks whether a circular button has been clicked
     Boolean CheckClick(float mouseX, float mouseY)
     {
+        if (hidden)
+        {
+            return false;
+        }
         // Get horizontal and vertical distance from center of button to mouse
         float distX = abs(mouseX - x);
         float distY = abs(mouseY - y);
@@ -49,8 +64,8 @@ class CookieButton extends Styles
 
     void OnClick()
     {
-        cookies.Increase(1);
-        cookies.increaseTextStyle.incrementOpacity = 255;
+        cookies.Increase(500);
         cookies.ShowIncrease();
+        hidden = true;
     }
 }

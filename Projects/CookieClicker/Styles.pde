@@ -55,6 +55,11 @@ class Styles
         color originalColor = color(r,g,b);
         color currentColor = originalColor;
         color clickedColor = color(r-30, g-30, b-30); 
+        color textColor = 0;
+
+        color chocolateChipColor = color(210,105,30);
+        color chocolateChipColorClicked = color(180, 75, 0);
+        color currentChipColor = chocolateChipColor;
 
         int SetFontSize(int _fontSize)
         {
@@ -67,10 +72,8 @@ class Styles
             {
                 fill(currentColor);
                 textSize(fontSize);
-                stroke(255);
-                strokeWeight(5);
                 textAlign(CENTER);
-                // Later also fill (0) for text in CookieButton.Display()
+                // More styling in CookieButton.Display()
                 return;
             }
             textAlign(LEFT);
@@ -176,6 +179,40 @@ class Styles
                 strokeWeight(5);
                 textAlign(CENTER);
                 // More text styling is done in FactoryButton.Display()
+                return;
+            }
+            textAlign(LEFT);
+            noStroke();
+        }
+    }
+
+    class GoldenCookieStyle 
+    {
+        int fontSize = 1;
+
+        int r = 218;
+        int g = 165;
+        int b = 32;
+        color originalColor = color(r,g,b);
+        color currentColor = originalColor;
+        color clickedColor = color(r-30, g-30, b-30); 
+        color textColor = 0;
+
+        color chocolateChipColor = color(128,0,0);
+
+        int SetFontSize(int _fontSize)
+        {
+            return fontSize = _fontSize;
+        }
+
+        void SetStyle(Boolean on)
+        {
+            if (on)
+            {
+                fill(currentColor);
+                textSize(fontSize);
+                textAlign(CENTER);
+                // Later also fill (0) for text in CookieButton.Display()
                 return;
             }
             textAlign(LEFT);

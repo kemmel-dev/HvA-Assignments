@@ -17,14 +17,14 @@
       },
       "args": [
 		"--force",
-		"--sketch=${workspaceRoot}",
+		"--sketch=${workspaceRoot}/Projects/CookieClicker",
 		"--output=${workspaceRoot}/out",
 		"--run"
 	  ],
       "windows": {
         "args": [
           "--force",
-          "--sketch=${workspaceRoot}",
+          "--sketch=${workspaceRoot}/Projects/CookieClicker",
           "--output=${workspaceRoot}\\out",
           "--run"
         ]

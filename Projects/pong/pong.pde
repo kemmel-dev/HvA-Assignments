@@ -17,6 +17,7 @@ Scores scores;
 Boolean p1Down = false, p1Up = false, p2Down = false, p2Up = false;
 // Stores whether we have to delay this frame or not
 Boolean delayNextFrame = false;
+
 // Setup the canvas and create paddle and ball objects.
 void setup()
 {

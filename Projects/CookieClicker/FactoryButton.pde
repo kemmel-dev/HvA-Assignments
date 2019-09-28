@@ -7,7 +7,7 @@ class FactoryButton extends Styles
     long total = 0L;
     int maxTotal = 100;
 
-    int cost = 1;
+    int cost = 1000;
     int increment = 10;
     String name = "Fabriek";
     String pluralName = "Fabrieken";

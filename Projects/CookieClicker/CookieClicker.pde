@@ -12,7 +12,7 @@ final int frameLimit = 30;
 int resetColorFrame = 0;
 int resetGoldencookieFrame = 0;
 
-final float SIZE_X = 1280, SIZE_Y = 720;
+final float SIZE_X = 1920, SIZE_Y = 1080;
 int incrementOpacity = 255;
 
 long increaseAmount = 0L;
@@ -21,7 +21,7 @@ Boolean countingFrames = false;
 
 void setup()
 {
-   size(1280, 720);
+   size(1920, 1080);
    
    noStroke();
    ellipseMode(CENTER);
@@ -111,7 +111,7 @@ void PlaceGoldenCookie()
     float p = random(0, pMax);
 
     // percentageCorrect defines the probability at which we place a cookie.
-    float percentageCorrect = 5;
+    float percentageCorrect = 2;
     if (p <= percentageCorrect)
     {
       goldenCookie.hidden = false;

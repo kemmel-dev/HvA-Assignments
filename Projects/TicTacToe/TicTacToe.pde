@@ -18,3 +18,14 @@ void draw()
     startMenu.Display();
 }
 
+void mousePressed()
+{
+    startMenu.mousePressed();
+}
+
+void mouseReleased()
+{
+    startMenu.mouseReleased();
+}
+
+

@@ -7,6 +7,7 @@ class StartMenu
     // Create a reference to our Style class and create a slider
     Style style = new Style();
     Slider slider = new Slider(SIZE_X / 2, SIZE_Y / 2, gridSizeMin, gridSizeMax);
+    StartButton startButton = new StartButton(SIZE_X / 2, SIZE_Y - SIZE_Y / 4, SIZE_X / 4, SIZE_Y / 8);
 
     // Renders everything in our start menu
     void Display()
@@ -16,11 +17,18 @@ class StartMenu
         textSize(style.fontSize);
         text("Please choose the grid size you want to play at by inputting a number below:", SIZE_X / 2, SIZE_Y / 3);
         slider.Display();
+        startButton.Display();
     }
 
     // Called by TicTacToe's mousePressed()
     void mousePressed()
     {
+        if (startButton.CheckClick(mouseX, mouseY))
+        {
+            TicTacToe.gridSize = int(slider.value);
+            TicTacToe.roundOver = false;
+            TicTacToe.newBoard = true;
+        }
         slider.mousePressed();
     }
 
@@ -45,6 +53,8 @@ class StartMenu
         // Indicates where the slider bar starts and ends
         float sliderMinX, sliderMaxX;
 
+        float textX, textY;
+
         // Indicator on the slider bar
         Indicator indicator;
 
@@ -64,6 +74,9 @@ class StartMenu
             value = sliderMin;
 
             indicator = new Indicator(x - w / 2, x + w / 2, y, style.rSliderValueHeight);
+
+            textX = x + w - w / 4;
+            textY = y + h / 2;
         }
 
         // Handles mousePressed events
@@ -88,7 +101,8 @@ class StartMenu
         {
             // Display value in text
             fill(style.sliderValueColor);
-            text(String.format("%d", GetValue()), x + w / 1.5, y + h / 2);
+            int tempValue = GetValue();
+            text(String.format("%d x %d", tempValue, tempValue), textX, textY);
             // If indicator was clicked and mouse is still down, 
             // move the slider and set the new value.
             if (clicked)
@@ -164,6 +178,40 @@ class StartMenu
             int rSliderHeight = 64;
             int rSliderWidth = 4;
             float rSliderValueHeight = rSliderHeight / 1.5;
+        }
+    }
+
+    class StartButton
+    {
+        // Startbutton x and y pos, width and height
+        float x, y, w, wHalf, h, hHalf;
+
+        StartButton(float _x, float _y, float _w, float _h)
+        {
+            x = _x;
+            y = _y;
+            w = _w;
+            h = _h;
+            wHalf = w / 2;
+            hHalf = h / 2;
+        }
+
+        void Display()
+        {
+            rect(x, y, w, h);
+        }
+
+        // Returns true if this indicator has been clicked, false otherwise.
+        Boolean CheckClick(float mouseX, float mouseY)
+        {
+            float distX = abs(mouseX - x);
+            float distY = abs(mouseY - y);
+
+            if (distX <= wHalf && distY <= hHalf)
+            {
+                return true;
+            }
+            return false;
         }
     }
 

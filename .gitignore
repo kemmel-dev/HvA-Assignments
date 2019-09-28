@@ -1,2 +1,2 @@
 # Makes git ignore the following files and folders:
-out/
+out/  # Ensures we don't include the local build files in the repo

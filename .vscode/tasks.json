@@ -16,15 +16,15 @@
         "panel": "dedicated"
       },
       "args": [
-		"--force",
-		"--sketch=${workspaceRoot}/Projects/CookieClicker",
+    "--force",
+		"--sketch=${workspaceRoot}/Projects/TicTacToe",
 		"--output=${workspaceRoot}/out",
 		"--run"
 	  ],
       "windows": {
         "args": [
           "--force",
-          "--sketch=${workspaceRoot}/Projects/CookieClicker",
+          "--sketch=${workspaceRoot}/Projects/TicTacToe",
           "--output=${workspaceRoot}\\out",
           "--run"
         ]

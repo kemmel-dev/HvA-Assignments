@@ -23,13 +23,46 @@ class StartMenu
     // Called by TicTacToe's mousePressed()
     void mousePressed()
     {
+        // If start button has been clicked
         if (startButton.CheckClick(mouseX, mouseY))
         {
-            TicTacToe.gridSize = int(slider.value);
+            // Round is no longer over
             TicTacToe.roundOver = false;
-            TicTacToe.newBoard = true;
+            // Set the current player to a random player
+            TicTacToe.currentPlayerType = int(random(1,3));
+
+            int currentValue = int(slider.value);
+            // Set gridSize to the slider value
+            TicTacToe.gridSize = currentValue;
+            
+            // Create a new 2d-array board with blank tiles of the size gridSize
+            TicTacToe.board = new Tile[currentValue][currentValue];
+            int max = TicTacToe.board.length;
+            
+            // Determine where the board starts on y and the needed tileWidth
+            float yPos = SIZE_Y / 6;
+            float tileWidth = (SIZE_Y - SIZE_Y / 3) / currentValue;
+            // Determine where the board starts on x
+            float boardWidth = tileWidth * currentValue;
+            float leftOver = SIZE_X - boardWidth;
+            float xPos = leftOver / 2;
+            for (int y = 0; y < max; y++)
+            {
+                for (int x = 0; x < max; x++)
+                {
+                    // fill the board with blank tiles
+                    TicTacToe.board[x][y] = new Tile(0, xPos, yPos, tileWidth);
+                    xPos += tileWidth;
+                }
+                xPos = leftOver / 2;
+                yPos += tileWidth;
+            }
         }
-        slider.mousePressed();
+        else 
+        {
+            slider.mousePressed();
+        }
+        
     }
 
     // Called by TicTacToe's mouseReleased()

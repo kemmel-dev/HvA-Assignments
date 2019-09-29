@@ -1,4 +1,4 @@
-Tile[] board;
+static Tile[][] board;
 
 StartMenu startMenu = new StartMenu();
 
@@ -9,6 +9,7 @@ final static int SIZE_Y = 1080;
 static Boolean newBoard = false;
 static Boolean roundOver = true;
 static int gridSize = 0;
+static int currentPlayerType = 0;
 
 void setup()
 {
@@ -25,26 +26,58 @@ void draw()
     }
     else
     {
-        if (newBoard)
-        {
-            CreateNewBoard();
-        }
+        background(0);
+        text(String.format("Player %d, it's your turn!", currentPlayerType), SIZE_X / 2, SIZE_Y / 8);
+        DrawBoard();
     }
 }
 
-void CreateNewBoard()
+void DrawBoard()
 {
-    board = new Tile[gridSize];
-    for (int i = 0; i < board.length; i++)
+    for (int y = 0; y < board.length; y++)
     {
-        board[i] = new Tile(0);
-        print(board[i].type);
+        for (int x = 0; x < board.length; x++)
+        {
+            rectMode(CORNER);
+            board[x][y].Display();
+        }
     }
 }
 
 void mousePressed()
 {
-    startMenu.mousePressed();
+    if (roundOver)
+    {
+        startMenu.mousePressed();
+    }
+    else 
+    {
+        for (int y = 0; y < board.length; y++)
+        {
+            for (int x = 0; x < board.length; x++)
+            {
+                if (board[x][y].CheckClick(mouseX, mouseY))
+                {
+                    board[x][y].ChangeType(currentPlayerType);
+                    ChangePlayer(currentPlayerType);
+                    return;
+                }
+            }
+        }
+    }
+}
+
+int ChangePlayer(int _currentPlayerType)
+{
+    switch(_currentPlayerType)
+    {
+        case 1:
+            return currentPlayerType = 2;
+        case 2:
+            return currentPlayerType = 1;
+        default:
+            return currentPlayerType = 0;
+    }
 }
 
 void mouseReleased()
@@ -52,4 +85,7 @@ void mouseReleased()
     startMenu.mouseReleased();
 }
 
+class Style
+{
 
+}

@@ -6,18 +6,25 @@ class StartMenu
 
     // Create a reference to our Style class and create a slider
     Style style = new Style();
-    Slider slider = new Slider(SIZE_X / 2, SIZE_Y / 2, gridSizeMin, gridSizeMax);
-    StartButton startButton = new StartButton(SIZE_X / 2, SIZE_Y - SIZE_Y / 4, SIZE_X / 4, SIZE_Y / 8);
+    Slider slider;
+    StartButton startButton;
 
     // Renders everything in our start menu
     void Display()
     {
         background(0);
         fill(255);
+        textAlign(CENTER);
         textSize(style.fontSize);
         text("Please choose the grid size you want to play at by inputting a number below:", SIZE_X / 2, SIZE_Y / 3);
         slider.Display();
         startButton.Display();
+    }
+
+    StartMenu()
+    {
+        slider = new Slider(SIZE_X / 2, SIZE_Y / 2, gridSizeMin, gridSizeMax);
+        startButton = new StartButton(SIZE_X / 2, SIZE_Y - SIZE_Y / 4, SIZE_X / 4, SIZE_Y / 8);
     }
 
     // Called by TicTacToe's mousePressed()
@@ -27,17 +34,17 @@ class StartMenu
         if (startButton.CheckClick(mouseX, mouseY))
         {
             // Round is no longer over
-            TicTacToe.roundOver = false;
+            ConnectFour.roundOver = false;
             // Set the current player to a random player
-            TicTacToe.currentPlayerType = int(random(1,3));
+            ConnectFour.currentPlayerType = int(random(1,3));
 
             int currentValue = int(slider.value);
             // Set gridSize to the slider value
-            TicTacToe.gridSize = currentValue;
+            ConnectFour.gridSize = currentValue;
             
             // Create a new 2d-array board with blank tiles of the size gridSize
-            TicTacToe.board = new Tile[currentValue][currentValue];
-            int max = TicTacToe.board.length;
+            ConnectFour.board = new Tile[currentValue][currentValue];
+            int max = ConnectFour.board.length;
             
             // Determine where the board starts on y and the needed tileWidth
             float yPos = SIZE_Y / 6;
@@ -51,7 +58,7 @@ class StartMenu
                 for (int x = 0; x < max; x++)
                 {
                     // fill the board with blank tiles
-                    TicTacToe.board[x][y] = new Tile(0, xPos, yPos, tileWidth);
+                    ConnectFour.board[x][y] = new Tile(xPos, yPos, tileWidth);
                     xPos += tileWidth;
                 }
                 xPos = leftOver / 2;

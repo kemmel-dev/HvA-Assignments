@@ -1,13 +1,12 @@
 // Tiles have three types: 0 for blank, 1 for cross, 2 for circle.
 class Tile
 {
-    int type = 0;
-
+    int type;
     float x, y, w;
 
-    Tile(int _type, float _x, float _y, float _w)
+    Tile(float _x, float _y, float _w)
     {
-        type = _type;
+        type = 0;
         x = _x;
         y = _y;
         w = _w;
@@ -33,27 +32,5 @@ class Tile
             return true;
         }
         return false;
-    }
-
-    color GetColor()
-    {   
-        switch(type)
-        {
-            case 1:
-                return color(255, 0, 0);
-            case 2:
-                return color(0, 0, 255);
-            default:
-                return 255;
-        }
-    }
-
-    int ChangeType(int currentPlayerType)
-    {
-        if (type == 0)
-        {
-            return type = currentPlayerType;
-        }
-        return 0;
     }
 }

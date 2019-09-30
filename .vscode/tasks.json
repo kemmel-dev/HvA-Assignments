@@ -17,14 +17,14 @@
       },
       "args": [
     "--force",
-		"--sketch=${workspaceRoot}/Projects/TicTacToe",
+		"--sketch=${workspaceRoot}/Projects/ConnectFour",
 		"--output=${workspaceRoot}/out",
 		"--run"
 	  ],
       "windows": {
         "args": [
           "--force",
-          "--sketch=${workspaceRoot}/Projects/TicTacToe",
+          "--sketch=${workspaceRoot}/Projects/ConnectFour",
           "--output=${workspaceRoot}\\out",
           "--run"
         ]

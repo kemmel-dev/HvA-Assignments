@@ -1,4 +1,5 @@
 static Tile[][] board;
+static Chip[][] chips;
 
 StartMenu startMenu = new StartMenu();
 

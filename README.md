@@ -1,2 +1,2 @@
 # HvA-Programming
-Processing Assignments for HvA's first year Programming course.
+Assignments in Processing for HvA's first year Programming course.

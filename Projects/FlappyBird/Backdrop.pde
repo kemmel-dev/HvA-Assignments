@@ -5,6 +5,9 @@ class Backdrop
     Cloud[] clouds = new Cloud[3];
     Pyramid[] pyramids;
 
+    private float SIZE_X_ONE_THIRD = SIZE_X / 3;
+    private float SIZE_Y_ONE_THIRD = SIZE_Y / 3;
+
     Backdrop()
     {
         style = new Style();
@@ -13,13 +16,11 @@ class Backdrop
 
     void InitialiseBackgroundObjects()
     {
+        // Initializes three specific clouds
         clouds[0] = new Cloud(SIZE_X / 4, SIZE_Y / 16, SIZE_X / 5, 3, 2, style.cloudColor1);
-        clouds[1] = new Cloud(SIZE_X - SIZE_X / 8, SIZE_Y / 20, SIZE_X / 6, 3, 2, style.cloudColor2);
-        clouds[2] = new Cloud(SIZE_X - SIZE_X / 3, SIZE_Y / 10, SIZE_X / 5, 4, 2, style.cloudColor3);
-
-        int amountOfPyramids = 2;
-        pyramids = new Pyramid[amountOfPyramids];
-        CreatePyramids();
+        clouds[1] = new Cloud(SIZE_X - SIZE_X / 8, SIZE_Y / 20, SIZE_X / 6, 2, 2, style.cloudColor2);
+        clouds[2] = new Cloud(SIZE_X - SIZE_X_ONE_THIRD, SIZE_Y / 10, SIZE_X / 5, 4, 2, style.cloudColor3);
+        InitiatePyramids();
     }
     
     void Display()
@@ -35,22 +36,19 @@ class Backdrop
         HandlePyramids();
     }
 
+    // Handles all the actions for each cloud
     void HandleClouds()
     {
         for (int i = 0; i < clouds.length; i++)
         {
             Cloud c = clouds[i];
 
-            if (i == 0)
-            {
-                print(c.OnScreen());
-            }
-
             c.Move();
             c.Display();
         }
     }
 
+    // Handles all the actions for each pyramid
     void HandlePyramids()
     {
         for (int i = 0; i < pyramids.length; i++)
@@ -61,28 +59,32 @@ class Backdrop
         }
     }
 
+    // Draws the ground
     void DrawGround()
     {
         fill(style.groundColor);
-        float height = SIZE_Y / 3;
+        float height = SIZE_Y_ONE_THIRD;
         rect(SIZE_X / 2, SIZE_Y - height / 2, SIZE_X, height);
     }
 
     // Creates our pyramid objects
-    void CreatePyramids()
+    void InitiatePyramids()
     {
+        int amountOfPyramids = 2;
+        pyramids = new Pyramid[amountOfPyramids];
+
         // Start at the left of the screen, draw a triangle
         // with a width of SIZE_X / 3
         float x1 = 0;
-        float y1 = SIZE_Y - SIZE_Y / 3;
+        float y1 = SIZE_Y - SIZE_Y_ONE_THIRD;
 
-        float x2 = SIZE_X / 3;
-        float y2 = SIZE_Y - SIZE_Y / 3;
+        float x2 = SIZE_X_ONE_THIRD;
+        float y2 = SIZE_Y - SIZE_Y_ONE_THIRD;
 
         float x3 = SIZE_X / 6;
-        float y3 = y1 - (SIZE_X / 3) * .75;
+        float y3 = y1 - (SIZE_X_ONE_THIRD) * .75;
 
-        float dx = (SIZE_X / 3) * 2;
+        float dx = (SIZE_X_ONE_THIRD) * 2;
 
         for (int i = 0; i < pyramids.length; i++)
         {
@@ -131,9 +133,9 @@ class Backdrop
             if (x1 < - width)
             {
                 
-                x1 += SIZE_X + SIZE_X / 3;
-                x2 += SIZE_X + SIZE_X / 3;
-                x3 += SIZE_X + SIZE_X / 3;
+                x1 += SIZE_X + SIZE_X_ONE_THIRD;
+                x2 += SIZE_X + SIZE_X_ONE_THIRD;
+                x3 += SIZE_X + SIZE_X_ONE_THIRD;
             }
         }
 
@@ -141,7 +143,7 @@ class Backdrop
 
     class Cloud
     {
-        float x, y, d, width, halfWidth;
+        float x, y, d, dFourth, height, width, halfWidth;
         float dx, dy;
         int amountX;
         int amountY;
@@ -152,12 +154,14 @@ class Backdrop
             x = _x;
             y = _y;
             d = _d;
+            dFourth = d / 4;
             amountX = _amountX;
             amountY = _amountY;
             cloudColor = _cloudColor;
 
             dx = d * .75;
             dy = d * .5;
+            height = dy * amountY;
             width = amountX * dx;
             halfWidth = width / 2;
         }
@@ -173,15 +177,14 @@ class Backdrop
                 ellipseMode(CENTER);
                 float xStart = x - halfWidth;
                 float xEnd = x + halfWidth;
-
-                float yEnd = y + dy * amountY;
+                float yEnd = y + height;
                 for (float yPos = y; yPos < yEnd; yPos += dy)
                 {
                     for (float xPos = xStart; xPos < xEnd; xPos += dx)
                     {
                         ellipse(xPos, yPos, d, d);
                     }
-                    xStart += d / 4;
+                    xStart += dFourth;
                 }
             }
         }

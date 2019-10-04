@@ -31,6 +31,7 @@ class Backdrop
 
     void HandleBackgroundObjects()
     {
+        DrawSun();
         DrawGround();
         HandleClouds();
         HandlePyramids();
@@ -57,6 +58,13 @@ class Backdrop
             p.Move();
             p.Display();
         }
+    }
+
+    // Draws the sun
+    void DrawSun()
+    {
+        fill(style.sunColor);
+        ellipse(style.sunX, style.sunY, style.sunD, style.sunD);
     }
 
     // Draws the ground
@@ -208,11 +216,6 @@ class Backdrop
         }
     }
 
-    class Cactus
-    {
-
-    }
-
     class Style
     {
         color groundColor = color(245, 197, 66);
@@ -221,5 +224,9 @@ class Backdrop
         color cloudColor2 = 186;
         color cloudColor3 = 225;
         color pyramidColor = color(226, 171, 104);
+        color sunColor = color(253, 204, 29);
+        float sunX = SIZE_X - SIZE_X / 8;
+        float sunY = SIZE_Y / 16;
+        float sunD = SIZE_X / 8;
     }
 }

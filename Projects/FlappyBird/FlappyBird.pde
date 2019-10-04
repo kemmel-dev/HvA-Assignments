@@ -2,17 +2,22 @@
 // 'Flappy Bird' for HvA's Programming Course.
 // This game is designed for a 9:16 aspect ratio (vertical window)
 
-
-Backdrop backdrop = new Backdrop();
-
 final static int SIZE_X = 1080;
 final static int SIZE_Y = 1920;
+
+Backdrop backdrop = new Backdrop();
+Bird bird = new Bird();
 
 final static int FRAME_RATE = 30;
 
 final static int MOVE_SPEED_X = (SIZE_X / 3) /  FRAME_RATE;
 
 Boolean onRight = false;
+
+Boolean movingUp = true;
+
+int framesUp = FRAME_RATE;
+int goingDownFrame = framesUp;
 
 void settings()
 {
@@ -35,4 +40,12 @@ void draw()
         onRight = true;
     }
     backdrop.Display();
+
+    bird.Move();
+    bird.Display();
+}
+
+void mousePressed()
+{
+    bird.OnTap();
 }

@@ -37,10 +37,11 @@ class Bird
         wingX2 = x - birdRThird;
     }
 
+    // Moves the bird up or down
     void Move()
     {
         // If jumping
-        if (!jumpAllowed)
+        if (! jumpAllowed)
         {
             // If we need to stop jumping
             if (frameCount > jumpOverFrame)
@@ -54,8 +55,8 @@ class Bird
         y = constrain(y + dy, 0, SIZE_Y);
     }
 
-    // When the user has tapped the screen
-    void OnTap()
+    // Called when the user has clicked the screen
+    void OnClick()
     {
         if (jumpAllowed)
         {   
@@ -67,7 +68,6 @@ class Bird
     // Called when the bird wants to jump
     void OnJump()
     {
-        Rotate();
         // Move up
         movementSpeedY = - MOVE_SPEED_X;
         jumpAllowed = false;
@@ -79,15 +79,13 @@ class Bird
     // Called when the bird's jump is over
     void OnJumpOver()
     {
-        Rotate();
-
         movementSpeedY = MOVE_SPEED_X;
 
         // Allow another jump
         jumpAllowed = true;
     }
 
-    // Rotates the bird 
+    // Makes the bird look like it's going up or down
     void Rotate()
     {
         translate(x, y);
@@ -102,14 +100,21 @@ class Bird
         translate(-x,-y);
     }
 
+    // Gets called to draw our bird
     void Display()
     {
+        // Set the rotation
         Rotate();
+
         // Draw the bird's body
         stroke(style.birdStrokeColor);
         strokeWeight(style.birdStrokeWeight);
         fill(style.birdColor);
         ellipse(x,y, birdD, birdD);
+
+        // Draw the wing
+        line(wingX1, y + birdRThird, wingX2, y + birdRThird);
+
         noStroke();
 
         // Draw the beak
@@ -119,11 +124,6 @@ class Bird
         // Draw the eye
         fill(style.eyeColor);
         ellipse(eyeX, y - birdRThird, style.eyeSize, style.eyeSize);
-
-        stroke(0);
-        strokeWeight(style.birdStrokeWeight);
-        line(wingX1, y + birdRThird, wingX2, y + birdRThird);
-        noStroke();
     }
 
     class Style

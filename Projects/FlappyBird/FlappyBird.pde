@@ -5,33 +5,35 @@
 final static int SIZE_X = 1080;
 final static int SIZE_Y = 1920;
 
+Foreground foreground = new Foreground();
 Backdrop backdrop = new Backdrop();
-Bird bird = new Bird();
 
-final static int FRAME_RATE = 30;
+final static int FRAME_RATE = 60;
 
 final static int MOVE_SPEED_X = (SIZE_X / 3) /  FRAME_RATE;
 
 Boolean onRight = false;
 
-Boolean movingUp = true;
-
-int framesUp = FRAME_RATE;
-int goingDownFrame = framesUp;
-
+// Set up the size the sketch run at
 void settings()
 {
     size(SIZE_X, SIZE_Y);
 }
 
+// Gets called after settings(), once on launch
+// before the first iteration of draw()
 void setup()
 {
+    // Set the frame rate and draw modes
     frameRate(FRAME_RATE);
     rectMode(CENTER);
     ellipseMode(CENTER);
+    textAlign(CENTER);
+    textSize(SIZE_Y / 25);
+    foreground.SpawnPipes();
 }
 
-// Gets called to draw every single frame of our game.
+// Gets called each time we draw a new frame
 void draw()
 {
     if (onRight == false)
@@ -40,12 +42,12 @@ void draw()
         onRight = true;
     }
     backdrop.Display();
-
-    bird.Move();
-    bird.Display();
+    foreground.Display();
 }
 
+// Gets called when the mouse has been pressed
 void mousePressed()
 {
-    bird.OnTap();
+    // Send the input to foreground
+    foreground.mousePressed();
 }

@@ -9,8 +9,6 @@ class Foreground
     ArrayList<Pipe> pipeList = new ArrayList<Pipe>();
     StartButton startButton = new StartButton(SIZE_X / 2, SIZE_Y / 2, SIZE_X / 3, SIZE_Y / 8);
 
-    Boolean gameOver = true;
-
     void SpawnPipes()
     {   
         float x = SIZE_X;
@@ -20,7 +18,7 @@ class Foreground
         pipeList.add(new Pipe(x, y, SIZE_Y - y));
     }
 
-    void DrawPipes()
+    void HandlePipes()
     {
         int removeCount = 0;
         for (Pipe p : pipeList)
@@ -33,7 +31,7 @@ class Foreground
             {
                 if (p.CheckCollision(bird))
                 {
-                    gameOver = true;
+                    onGameOver();
                 }
                 p.Move();
                 p.Display();
@@ -47,6 +45,7 @@ class Foreground
                 pipeList.remove(0);
             }
             SpawnPipes();
+            scoreboard.score += 1;
         }
     }
 
@@ -58,7 +57,7 @@ class Foreground
         }
         else
         {
-            DrawPipes();
+            HandlePipes();
             bird.Move();
             
         }
@@ -107,7 +106,10 @@ class Foreground
             fill(style.fillColor);
             rect(x, y, w, h);
             fill(style.textColor);  
+            textAlign(CENTER);
             text("START", x, y + h/6);
+            
+            text(String.format("Highscore: %d", scoreboard.highScore), x, y + h);
         }
 
         Boolean CheckClick()

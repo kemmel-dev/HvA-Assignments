@@ -1,7 +1,7 @@
 class Bird
 {
     // Important: positon and size of initial bird
-    float x, y, birdD;
+    int x, y, birdD;
 
     // These derive from bird.x, bird.y and bird.birdD
     float birdR, birdDThird, birdRThird;
@@ -9,7 +9,7 @@ class Bird
     float wingX1, wingX2, wingY;
 
     // Holds the current movement speed for our bird in the y direction
-    float movementSpeedY = MOVE_SPEED_X;
+    int movementSpeedY = MOVE_SPEED_X;
 
     // Holds the current frame at which the bird needs to stop jumping.
     float jumpOverFrame;
@@ -50,7 +50,7 @@ class Bird
             }
         }
 
-       float dy = movementSpeedY;
+       int dy = movementSpeedY;
         // Adjust y position to the new position, but dont go out of the canvas
         y = constrain(y + dy, 0, SIZE_Y);
     }
@@ -86,16 +86,31 @@ class Bird
     }
 
     // Makes the bird look like it's going up or down
-    void Rotate()
+    // Call with 0 as param to set rotation, and with 1 to undo that rotation
+    void Rotate(int undo)
     {
         translate(x, y);
-        if (!jumpAllowed)
+        if (undo == 0)
         {
-            rotate(radians(-30));
+            if (!jumpAllowed)
+            {
+                rotate(radians(-30));
+            }
+            else
+            {
+                rotate(radians(30));
+            }
         }
         else
         {
-            rotate(radians(30));
+            if (jumpAllowed)
+            {
+                rotate(radians(-30));
+            }
+            else
+            {
+                rotate(radians(30));
+            }
         }
         translate(-x,-y);
     }
@@ -104,7 +119,7 @@ class Bird
     void Display()
     {
         // Set the rotation
-        Rotate();
+        Rotate(0);
 
         // Draw the bird's body
         stroke(style.birdStrokeColor);
@@ -124,11 +139,13 @@ class Bird
         // Draw the eye
         fill(style.eyeColor);
         ellipse(eyeX, y - birdRThird, style.eyeSize, style.eyeSize);
+
+        Rotate(1);
     }
 
     class Style
     {        
-        float birdSize = SIZE_X / 16;
+        int birdSize = SIZE_X / 16;
         float beakSize = birdSize / 3;
         float eyeSize = beakSize - beakSize / 3;
         color eyeColor = 0;

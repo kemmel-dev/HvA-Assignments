@@ -7,12 +7,15 @@ final static int SIZE_Y = 1920;
 
 Foreground foreground = new Foreground();
 Backdrop backdrop = new Backdrop();
+Scoreboard scoreboard = new Scoreboard();
 
 final static int FRAME_RATE = 60;
 
 final static int MOVE_SPEED_X = (SIZE_X / 3) /  FRAME_RATE;
 
 Boolean onRight = false;
+
+static Boolean gameOver = true;
 
 // Set up the size the sketch run at
 void settings()
@@ -43,6 +46,17 @@ void draw()
     }
     backdrop.Display();
     foreground.Display();
+    scoreboard.Display();
+
+}
+
+void onGameOver()
+{
+    scoreboard.SaveHighScore();
+    scoreboard.score = 0;
+    gameOver = true;
+    foreground = new Foreground();
+    foreground.SpawnPipes();
 }
 
 // Gets called when the mouse has been pressed

@@ -30,12 +30,19 @@ class Pipe
 
     Boolean CheckCollision(Bird bird)
     {
-        if (bird.x > x && bird.x < x + w)
+        int birdX = bird.x;
+        int birdY = bird.y;
+        if (birdX > x && birdX < x + w)
         {
-            if (bird.y > y && bird.y < y + h)
+            if (birdY > y && birdY < y + h)
             {
                 return true;
             }
+        }
+        // Also checks if bird fell to the ground
+        if (birdY == SIZE_Y)
+        {
+            return true;
         }
         return false;
     }

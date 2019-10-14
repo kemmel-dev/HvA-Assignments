@@ -1,6 +1,9 @@
 # HvA-Programming
 Assignments in Processing for HvA's first year Programming course.
 
+#### Table of Contents
+[Headers](#Assignment: Draw a screenshot of a game.)
+
 
 ## Assignment: Draw a screenshot of a game.
 

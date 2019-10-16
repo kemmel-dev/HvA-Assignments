@@ -2,12 +2,18 @@
 final static int SIZE_X = 1920;
 final static int SIZE_Y = 1080;
 
+Boolean leftDown = false;
+Boolean rightDown = false;
+
 final int BULLET_SPEED = SIZE_Y / 60;
 
 Player player;
 Invader[][] invaderGrid = new Invader[6][6];
 
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
+
+PImage invaderGraphic;
+PImage shipGraphic;
 
 // Setup the screen size
 void settings()
@@ -20,8 +26,12 @@ void setup()
 {
     imageMode(CENTER);
     rectMode(CENTER);
-    initInvaders();
     player = new Player();
+    invaderGraphic = loadImage("enemy.png");
+    invaderGraphic.resize(SIZE_X / 25, 0);
+    shipGraphic = loadImage("ship.png");
+    shipGraphic.resize(SIZE_X / 25, 0);
+    initInvaders();
 }
 
 // Sets up the grid of Space Invaders
@@ -58,12 +68,13 @@ void showInvaders()
     {
         for (Invader i : list)
         {
+            i.x += 
             i.display();
         }
     }
 }
 
-// Handles all actions for a bullet
+// Handles all actions for a bullet -- this includes killing invaders
 void handleBullets()
 {
     // Stores the indexes for each bullet that needs to be removed
@@ -73,25 +84,34 @@ void handleBullets()
     for (Bullet b : bulletList)
     {
         // If bullet needs to be removed
-        if (b.y < -10)
+        // (offscreen or hit a target)
+        if (b.y < -10 || b.hit())
         {
+            // append it's index in indexList
             indexList.append(i);
         }
         else 
         {
-            // Handle bullet
             b.move();
             b.display();
         }
         i++;
     }
 
+    // Get the number of bullets that need to be removed
     int numBullets = indexList.size();
     if (numBullets > 0)
     {
-        // Remove bullets
         for (int j = 0; j < numBullets; j++)
         {
+            // If bullet needs to be removed because it hit a target,
+            Hit target = bulletList.get(j).target;
+            if (target.hit)
+            {   
+                // Kill the target
+                invaderGrid[target.i][target.j].alive = false;
+            }
+            // Remove the bullet
             bulletList.remove(j);
         }
     }
@@ -102,16 +122,43 @@ void handleBullets()
 void draw()
 {
     background(0);
+    player.move();
     player.display();
+    showInvaders();
     handleBullets();
 }
 
 // Called whenever a key is pressed
 void keyPressed()
 {
-    // test
-    if (key == 'a')
+    switch(key)
     {
-        player.shoot();
+        case 'w':
+            player.shoot();
+            return;
+        case 'a':
+            leftDown = true;
+            return;
+        case 'd':
+            rightDown = true;
+            return;
+        default:
+            return;
+    }
+}
+
+// Called whenever a key is released
+void keyReleased()
+{
+    switch(key)
+    {
+        case 'a':
+            leftDown = false;
+            return;
+        case 'd':
+            rightDown = false;
+            return;
+        default:
+            return;
     }
 }

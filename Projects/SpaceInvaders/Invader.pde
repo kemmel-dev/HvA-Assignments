@@ -2,19 +2,23 @@ class Invader
 {
     int x;
     int y;
-
-    PImage invaderGraphic;
+    int halfWidth;
+    int bottom;
+    boolean alive = true;
 
     Invader(int _x, int _y)
     {
         x = _x;
         y = _y;
-        invaderGraphic = loadImage("enemy.png");
-        invaderGraphic.resize(SIZE_X / 25, 0);
+        halfWidth = invaderGraphic.width / 2;
+        bottom = y + halfWidth;
     }
 
     void display()
     {
-        image(invaderGraphic, x, y);
+        if (alive)
+        {
+            image(invaderGraphic, x, y);
+        }
     }
 }

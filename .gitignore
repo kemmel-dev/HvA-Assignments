@@ -2,3 +2,4 @@
 
 # Ensure we don't include the local build files:
 out/
+.vscode/

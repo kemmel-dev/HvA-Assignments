@@ -66,11 +66,36 @@ void showInvaders()
 // Handles all actions for a bullet
 void handleBullets()
 {
+    // Stores the indexes for each bullet that needs to be removed
+    int i = 0;
+    IntList indexList = new IntList();
+
     for (Bullet b : bulletList)
     {
-        b.move();
-        b.display();
+        // If bullet needs to be removed
+        if (b.y < -10)
+        {
+            indexList.append(i);
+        }
+        else 
+        {
+            // Handle bullet
+            b.move();
+            b.display();
+        }
+        i++;
     }
+
+    int numBullets = indexList.size();
+    if (numBullets > 0)
+    {
+        // Remove bullets
+        for (int j = 0; j < numBullets; j++)
+        {
+            bulletList.remove(j);
+        }
+    }
+
 }
 
 // Called each time a new frame of our game is drawn

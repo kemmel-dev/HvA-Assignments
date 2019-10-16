@@ -1,6 +1,8 @@
 class Bullet
 {
-    int x, y;
+    int x, y; 
+    int w = SIZE_X / 150;
+    int h = SIZE_Y / 50;
 
     Bullet()
     {
@@ -10,7 +12,7 @@ class Bullet
 
     void display()
     {
-        rect(x, y, 5, 10);
+        rect(x, y, w, h);
     }
 
     void move()

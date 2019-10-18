@@ -23,8 +23,10 @@ Assignments in Processing for HvA's first year Programming course.
 ##### Legend:
 
 ![alt-text][done] Done
-![alt-text][done] Work in Progress
-![alt-text][done] Development not yet started
+
+![alt-text][underconstruction] Work in Progress
+
+![alt-text][todo] Development not yet started
 
 ## Assignment: Draw a screenshot of a game.
 

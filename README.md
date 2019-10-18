@@ -157,5 +157,6 @@ The game features
 - Book and videos: Chapter 1-9
 
 [todo]: https://i.imgur.com/nA2YBmI.png "Development not yet started"
+<img src="https://i.imgur.com/nA2YBmI.png" width="48">
 [done]: https://i.imgur.com/TDfELJM.png "Done"
 [underconstruction]: http://www.clker.com/cliparts/8/2/4/d/1197124191544202843dchandlr_dchandlr_work.svg.svg.thumb.png "W.I.P."

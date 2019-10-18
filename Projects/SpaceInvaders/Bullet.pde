@@ -4,15 +4,18 @@ class Bullet
     int w = SIZE_X / 150;
     int h = SIZE_Y / 50;
 
+    // If target exists (!= null), this bullet has hit an invader
     Hit target;
 
     Bullet()
     {
         y = player.y;
         x = player.x;
-        target = new Hit(false, 0, 0);
     }
 
+    // See if the bullet has hit any invader
+    // If true, stores a new Hit in target and returns true
+    // Otherwise returns false
     boolean hit()
     {
         int i = 0;
@@ -25,7 +28,7 @@ class Bullet
                 {
                     if (x > invader.x - invader.halfWidth && x < invader.x + invader.halfWidth)
                     {
-                        if (y < invader.bottom)
+                        if (y < invader.bottom && y > invader.top)
                         {
                             target = new Hit(true, i, j);
                             return true;

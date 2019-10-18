@@ -4,6 +4,7 @@ class Invader
     int y;
     int halfWidth;
     int bottom;
+    int top;
     boolean alive = true;
 
     Invader(int _x, int _y)
@@ -12,6 +13,7 @@ class Invader
         y = _y;
         halfWidth = invaderGraphic.width / 2;
         bottom = y + halfWidth;
+        top = y - halfWidth;
     }
 
     void display()
@@ -19,6 +21,17 @@ class Invader
         if (alive)
         {
             image(invaderGraphic, x, y);
+        }
+    }
+
+    void move(int _x, int _y)
+    {
+        x += _x;
+        if (y > _y)
+        {
+            y += _y;
+            bottom = y + halfWidth;
+            top = y - halfWidth;
         }
     }
 }

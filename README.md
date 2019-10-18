@@ -20,6 +20,12 @@ Assignments in Processing for HvA's first year Programming course.
 
 ![alt-text][done][FlappyBird](https://github.com/kemmel-dev/HvA-Programming#assignment-flappy-bird)
 
+##### Legend:
+
+![alt-text][done] Done
+![alt-text][done] Work in Progress
+![alt-text][done] Development not yet started
+
 ## Assignment: Draw a screenshot of a game.
 
 Use the basic Processing commands to draw a screenshot of a game.

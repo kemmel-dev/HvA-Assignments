@@ -2,23 +2,23 @@
 Assignments in Processing for HvA's first year Programming course.
 
 ##### Table of Contents
-[Screenshot](https://github.com/kemmel-dev/HvA-Programming#assignment-draw-a-screenshot-of-a-game)
+![alt-text][done][Screenshot](https://github.com/kemmel-dev/HvA-Programming#assignment-draw-a-screenshot-of-a-game)
 
-[Pong](https://github.com/kemmel-dev/HvA-Programming#assignment-pong)
+![alt-text][done][Pong](https://github.com/kemmel-dev/HvA-Programming#assignment-pong)
 
-[CookieClicker](https://github.com/kemmel-dev/HvA-Programming#assignment-cookieclicker)
+![alt-text][done][CookieClicker](https://github.com/kemmel-dev/HvA-Programming#assignment-cookieclicker)
 
-[SpaceInvaders](https://github.com/kemmel-dev/HvA-Programming#assignment-space-invaders)
+![alt-text][underconstruction][SpaceInvaders](https://github.com/kemmel-dev/HvA-Programming#assignment-space-invaders)
 
-[ParticleSystem](https://github.com/kemmel-dev/HvA-Programming#assignment-particle-system)
+![alt-text][todo][ParticleSystem](https://github.com/kemmel-dev/HvA-Programming#assignment-particle-system)
 
-[TicTacToe](https://github.com/kemmel-dev/HvA-Programming#assignment-tic-tac-toe)
+![alt-text][done][TicTacToe](https://github.com/kemmel-dev/HvA-Programming#assignment-tic-tac-toe)
 
-[CatchTheFruit](https://github.com/kemmel-dev/HvA-Programming#assignment-catch-the-fruit)
+![alt-text][todo][CatchTheFruit](https://github.com/kemmel-dev/HvA-Programming#assignment-catch-the-fruit)
 
-[DuckHunt](https://github.com/kemmel-dev/HvA-Programming#assignment-duck-hunt)
+![alt-text][todo][DuckHunt](https://github.com/kemmel-dev/HvA-Programming#assignment-duck-hunt)
 
-[FlappyBird](https://github.com/kemmel-dev/HvA-Programming#assignment-flappy-bird)
+![alt-text][done][FlappyBird](https://github.com/kemmel-dev/HvA-Programming#assignment-flappy-bird)
 
 ## Assignment: Draw a screenshot of a game.
 
@@ -155,3 +155,7 @@ The game features
 3. a game-over screen when the player dies and from where the game can be restarted.
 #### Reference material
 - Book and videos: Chapter 1-9
+
+[todo]: https://i.imgur.com/nA2YBmI.png "Development not yet started"
+[done](https://i.imgur.com/TDfELJM.png) "Done"
+[underconstruction](http://www.clker.com/cliparts/8/2/4/d/1197124191544202843dchandlr_dchandlr_work.svg.svg.thumb.png) "W.I.P."

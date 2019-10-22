@@ -2,6 +2,7 @@ class Player
 {   
     // Stores the image that represents our player
     PImage graphic;
+    int r;
 
     // Stores this player's x and y coördinates
     PVector position;
@@ -17,6 +18,7 @@ class Player
         // Load the graphic for this player object
         graphic = loadImage("basket.png");
         graphic.resize(PLAYER_WIDTH, 0);
+        r = graphic.width / 2;
 
         // Initialize position to given start-coörds
         position = new PVector(x, y);

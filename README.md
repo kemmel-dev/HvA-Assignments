@@ -14,7 +14,7 @@ Assignments in Processing for HvA's first year Programming course.
 
 ![alt-text][done][TicTacToe](https://github.com/kemmel-dev/HvA-Programming#assignment-tic-tac-toe)
 
-![alt-text][underconstruction][CatchTheFruit](https://github.com/kemmel-dev/HvA-Programming#assignment-catch-the-fruit)
+![alt-text][done][CatchTheFruit](https://github.com/kemmel-dev/HvA-Programming#assignment-catch-the-fruit)
 
 ![alt-text][todo][DuckHunt](https://github.com/kemmel-dev/HvA-Programming#assignment-duck-hunt)
 

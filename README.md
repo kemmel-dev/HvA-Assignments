@@ -8,9 +8,9 @@ Assignments in Processing for HvA's first year Programming course.
 
 ![alt-text][done][CookieClicker](https://github.com/kemmel-dev/HvA-Programming#assignment-cookieclicker)
 
-![alt-text][underconstruction][SpaceInvaders](https://github.com/kemmel-dev/HvA-Programming#assignment-space-invaders)
+![alt-text][done][SpaceInvaders](https://github.com/kemmel-dev/HvA-Programming#assignment-space-invaders)
 
-![alt-text][todo][ParticleSystem](https://github.com/kemmel-dev/HvA-Programming#assignment-particle-system)
+![alt-text][underconstruction][ParticleSystem](https://github.com/kemmel-dev/HvA-Programming#assignment-particle-system)
 
 ![alt-text][done][TicTacToe](https://github.com/kemmel-dev/HvA-Programming#assignment-tic-tac-toe)
 

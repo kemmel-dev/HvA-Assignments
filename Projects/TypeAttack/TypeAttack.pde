@@ -56,12 +56,17 @@ void draw()
     showScore();
 }
 
+int getRandomYPos()
+{
+    return int(random(-500, -100));
+}
+
 // Initializes our yPos array with random y positions
-void initPosArrays()
+void initPosArrays() 
 {
     int x = lettersStart;
     // Sets a random value between (and including) yMin and yMax
-    for (int i = 0; i < arraysLength; i++)
+    for (int i = 0; i < arraysLength; i++) 
     {
         // Want to include yMax so add 1
         yPosArray[i] = getRandomYPos();
@@ -150,7 +155,7 @@ void checkForLetterShot()
 void shootLetter(int letterIndex)
 {
     // Increase score by y position of letter
-    int points = yPosArray[letterIndex];
+    int points = height - yPosArray[letterIndex];
     score += points;
     drawShot(letterIndex);
     // Letter gets a new position

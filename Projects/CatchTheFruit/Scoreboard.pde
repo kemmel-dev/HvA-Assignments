@@ -7,7 +7,7 @@ class Scoreboard
     float yDuringGame = SIZE_Y / 10;
 
     float xGameOver = SIZE_X / 2;
-    float yGameOVer = SIZE_Y / 2 + SIZE_Y / 8;
+    float yGameOVer = SIZE_Y / 2;
 
     void draw()
     {

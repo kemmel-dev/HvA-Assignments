@@ -9,8 +9,8 @@ class Bullet
     {
         pos = _pos;
         dir = _dir;
-        w = 25;
         h = 100;
+        w = 25;
     }
 
     Boolean hitEdge()
@@ -70,9 +70,9 @@ class Bullet
     void show()
     {
         translate(pos.x, pos.y);
-        rotate(dir.heading());
+        rotate(dir.heading() + radians(PI / 2));
         rect(0, 0, w, h);
-        rotate(-dir.heading());
+        rotate(-(dir.heading() + radians(PI / 2)));
         translate(-pos.x, -pos.y);
     }
 }

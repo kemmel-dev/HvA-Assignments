@@ -23,15 +23,9 @@ public class Student {
     public String toString()
     {
         StringBuilder result = new StringBuilder("");
-        result.append(studentNr);
-        result.append(' ');
-        result.append(voornaam);
-        result.append(' ');
-        result.append(achternaam);
-        result.append(" (");
-        result.append(korteGeboorteDatum());
-        result.append(")\nAdres: ");
-        result.append(adres.toString());
+        result.append(studentNr).append(' ').append(voornaam).append(' ').append(achternaam);
+        result.append(" (").append(korteGeboorteDatum()).append(")\n");
+        result.append("Adres: ").append(adres.toString());
         return result.toString();
     }
 

@@ -27,14 +27,9 @@ public class Adres {
 
     public String toString()
     {
-        StringBuilder result = new StringBuilder("");
-        result.append(straat);
-        result.append(' ');
-        result.append(huisNr);
-        result.append(", ");
-        result.append(postcode);
-        result.append(' ');
-        result.append(plaats);
+        StringBuilder result = new StringBuilder();
+        result.append(straat).append(' ').append(huisNr).append(", ");
+        result.append(postcode).append(' ').append(plaats);
         return result.toString();
     }
 

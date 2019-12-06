@@ -6,7 +6,7 @@ public class Klas {
     private int aantalStudenten;
     private Student[] studenten;
 
-    private final int MAX_AANTAL_STUDENTEN = 30;
+    public static final int MAX_AANTAL_STUDENTEN = 30;
 
     Klas(String _naam)
     {

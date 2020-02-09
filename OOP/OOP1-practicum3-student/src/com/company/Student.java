@@ -11,7 +11,7 @@ public class Student {
     LocalDate geboorteDatum;
     Adres adres;
 
-    Student(int _studentNr, String _voornaam, String _achternaam, LocalDate _geboorteDatum, Adres _adres)
+    public Student(int _studentNr, String _voornaam, String _achternaam, LocalDate _geboorteDatum, Adres _adres)
     {
         studentNr = _studentNr;
         voornaam = _voornaam;

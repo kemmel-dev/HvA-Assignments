@@ -17,7 +17,7 @@ public class Adres {
      * @param _postcode zip code
      * @param _plaats city
      */
-    Adres(String _straat, int _huisNr, String _postcode, String _plaats)
+    public Adres(String _straat, int _huisNr, String _postcode, String _plaats)
     {
         straat = _straat;
         huisNr = _huisNr;

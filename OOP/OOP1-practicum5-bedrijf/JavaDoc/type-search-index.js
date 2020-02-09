@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.company","l":"Bedrijf"},{"p":"com.company","l":"Main"},{"p":"com.company","l":"Manager"},{"p":"com.company","l":"Oproepbaar"},{"p":"com.company","l":"Persoon"},{"p":"com.company","l":"Vrijwilliger"},{"p":"com.company","l":"Werknemer"},{"p":"com.company","l":"Zzper"}]

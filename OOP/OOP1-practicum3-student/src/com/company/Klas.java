@@ -8,7 +8,7 @@ public class Klas {
 
     public static final int MAX_AANTAL_STUDENTEN = 30;
 
-    Klas(String _naam)
+    public Klas(String _naam)
     {
         naam = _naam;
         aantalStudenten = 0;
